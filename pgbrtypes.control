@@ -1,0 +1,5 @@
+comment = 'A pgx extension to handle PIS/PASEP type'
+default_version = '0.1'
+module_pathname = '$libdir/pgbrtypes'
+relocatable = false
+superuser = false
