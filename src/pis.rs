@@ -40,7 +40,7 @@ impl InOutFuncs for Pis {
         let digit = compute_digit(n / 10);
 
         if dv != digit {
-            pgx::error!("invalid check digit for PIS {}", digit);
+            pgx::error!("invalid check digit for PIS");
         }
 
         Pis(n)
