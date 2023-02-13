@@ -23,7 +23,11 @@ fn compute_digit(mut pis: i64) -> i64 {
     ret
 }
 
+#[derive(Eq, PartialEq, Ord, Hash, PartialOrd)]
 #[derive(Copy, Clone, PostgresType, Serialize, Deserialize)]
+#[derive(PostgresEq)]
+#[derive(PostgresOrd)]
+#[derive(PostgresHash)]
 #[inoutfuncs]
 pub struct Pis(i64);
 
