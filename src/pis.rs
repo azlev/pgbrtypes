@@ -11,11 +11,16 @@ fn compute_digit(mut pis: i64) -> i64 {
         pis = pis / 10
     }
 
-    let mut ret = (3 * digits[0]) + (2 * digits[1]) +
-            (9 * digits[2]) + (8 * digits[3]) +
-            (7 * digits[4]) + (6 * digits[5]) +
-            (5 * digits[6]) + (4 * digits[7]) +
-            (3 * digits[8]) + (2 * digits[9]);
+    let mut ret = (3 * digits[0])
+        + (2 * digits[1])
+        + (9 * digits[2])
+        + (8 * digits[3])
+        + (7 * digits[4])
+        + (6 * digits[5])
+        + (5 * digits[6])
+        + (4 * digits[7])
+        + (3 * digits[8])
+        + (2 * digits[9]);
     ret = 11 - (ret % 11);
     if ret > 9 {
         ret = 0;
@@ -23,11 +28,21 @@ fn compute_digit(mut pis: i64) -> i64 {
     ret
 }
 
-#[derive(Eq, PartialEq, Ord, Hash, PartialOrd)]
-#[derive(Copy, Clone, PostgresType, Serialize, Deserialize)]
-#[derive(PostgresEq)]
-#[derive(PostgresOrd)]
-#[derive(PostgresHash)]
+#[derive(
+    Eq,
+    PartialEq,
+    Ord,
+    Hash,
+    PartialOrd,
+    Copy,
+    Clone,
+    PostgresType,
+    Serialize,
+    Deserialize,
+    PostgresEq,
+    PostgresOrd,
+    PostgresHash,
+)]
 #[inoutfuncs]
 pub struct Pis(i64);
 
@@ -35,7 +50,7 @@ impl InOutFuncs for Pis {
     fn input(_input: &CStr) -> Self {
         let s = _input.to_str().unwrap();
         let n = s.parse::<i64>().unwrap();
- 
+
         if n < 10 || n > 99999999999 {
             pgx::error!("PIS must be between 10 and 99999999999");
         }
@@ -59,7 +74,9 @@ impl InOutFuncs for Pis {
         group[2] = (self.0 / 10) % 100;
         group[3] = self.0 % 10;
 
-        buffer.push_str(&format!("{:03}.{:05}.{:02}-{:1}",
-                group[0], group[1], group[2], group[3]));
+        buffer.push_str(&format!(
+            "{:03}.{:05}.{:02}-{:1}",
+            group[0], group[1], group[2], group[3]
+        ));
     }
 }
