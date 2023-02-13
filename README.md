@@ -8,3 +8,17 @@ Also, it's another project to explore brazilian document numbers (CNPJ, CPF, PIS
 - int64 storage (better performance and indexing)
 - string conversion and mask
 
+## Installation
+
+```bash
+cargo pgx package # pg_config must be on PATH
+
+psql
+CREATE EXTENSION pgbrtypes;
+SELECT CNPJ '191';
+        cnpj        
+--------------------
+ 00.000.000/0001-91
+(1 row)
+```
+
