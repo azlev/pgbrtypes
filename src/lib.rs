@@ -1,6 +1,7 @@
 mod cnpj;
 mod cpf;
 mod pis;
+mod rg;
 
 use pgx::prelude::*;
 
