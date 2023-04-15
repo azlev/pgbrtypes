@@ -16,9 +16,18 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
-    - name: Rust Cache
-      uses: Swatinem/rust-cache@v2.2.1
+
+    - name: Cache pgx
+      id: cache-pgx
+      uses: actions/cache@v3
+      with:
+        path: ~/.cargo
+        key: ${{ hashFiles('Cargo.toml') }}
+
     - name: Prepare
+      if: ${{ steps.cache-pgx.outputs.cache-hit != 'true' }}
       run: cargo install --locked cargo-pgx && cargo pgx init
+
     - name: Build
       run: cargo pgx run
+
