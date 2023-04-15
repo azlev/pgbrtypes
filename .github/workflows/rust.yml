@@ -17,16 +17,27 @@ jobs:
     steps:
     - uses: actions/checkout@v3
 
-    - name: Cache pgx
-      id: cache-pgx
+    - name: Cache cargo
+      id: cache-cargo
       uses: actions/cache@v3
       with:
         path: ~/.cargo
         key: ${{ hashFiles('Cargo.toml') }}
 
-    - name: Prepare
+    - name: pgx install
+      if: ${{ steps.cache-cargo.outputs.cache-hit != 'true' }}
+      run: cargo install --locked cargo-pgx
+
+    - name: Cache pgx init
+      id: cache-pgx
+      uses: actions/cache@v3
+      with:
+        path: ~/.pgx
+        key: ${{ hashFiles('Cargo.toml') }}
+
+    - name: pgx init
       if: ${{ steps.cache-pgx.outputs.cache-hit != 'true' }}
-      run: cargo install --locked cargo-pgx && cargo pgx init
+      run: cargo pgx init
 
     - name: Build
       run: cargo pgx run
