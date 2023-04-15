@@ -16,7 +16,7 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
-    - name: Configure
+    - name: Prepare
       run: cargo install --locked cargo-pgx && cargo pgx init
     - name: Build
       run: cargo pgx run
