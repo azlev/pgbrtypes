@@ -1,4 +1,4 @@
-comment = 'A pgx extension to handle brazilian documents types'
+comment = 'A pgrx extension to handle brazilian documents types'
 default_version = '0.1'
 module_pathname = '$libdir/pgbrtypes'
 relocatable = false

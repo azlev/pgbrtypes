@@ -24,21 +24,21 @@ jobs:
         path: ~/.cargo
         key: ${{ hashFiles('Cargo.toml') }}
 
-    - name: pgx install
+    - name: pgrx install
       if: ${{ steps.cache-cargo.outputs.cache-hit != 'true' }}
-      run: cargo install --locked cargo-pgx
+      run: cargo install --locked cargo-pgrx
 
-    - name: Cache pgx init
-      id: cache-pgx
+    - name: Cache pgrx init
+      id: cache-pgrx
       uses: actions/cache@v3
       with:
-        path: ~/.pgx
+        path: ~/.pgrx
         key: ${{ hashFiles('Cargo.toml') }}
 
-    - name: pgx init
-      if: ${{ steps.cache-pgx.outputs.cache-hit != 'true' }}
-      run: cargo pgx init
+    - name: pgrx init
+      if: ${{ steps.cache-pgrx.outputs.cache-hit != 'true' }}
+      run: cargo pgrx init
 
     - name: Build
-      run: cargo pgx run
+      run: cargo pgrx run
 

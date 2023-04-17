@@ -1,6 +1,6 @@
 use core::ffi::CStr;
-use pgx::prelude::*;
-use pgx::{InOutFuncs, StringInfo};
+use pgrx::prelude::*;
+use pgrx::{InOutFuncs, StringInfo};
 use serde::{Deserialize, Serialize};
 
 fn compute_digit(mut cnpj: i64) -> i64 {
@@ -71,14 +71,14 @@ impl InOutFuncs for Cnpj {
         let n = s.parse::<i64>().unwrap();
 
         if n < 100 || n > 99999999999999 {
-            pgx::error!("CNPJ must be between 100 and 99999999999999.");
+            pgrx::error!("CNPJ must be between 100 and 99999999999999.");
         }
 
         let dv = n % 100;
         let digit = compute_digit(n / 100);
 
         if dv != digit {
-            pgx::error!("invalid check digit for CNPJ.");
+            pgrx::error!("invalid check digit for CNPJ.");
         }
 
         Cnpj(n)

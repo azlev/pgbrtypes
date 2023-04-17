@@ -2,6 +2,6 @@ mod cnpj;
 mod cpf;
 mod pis;
 
-use pgx::prelude::*;
+use pgrx::prelude::*;
 
-pgx::pg_module_magic!();
+pgrx::pg_module_magic!();

@@ -1,6 +1,6 @@
 use core::ffi::CStr;
-use pgx::prelude::*;
-use pgx::{InOutFuncs, StringInfo};
+use pgrx::prelude::*;
+use pgrx::{InOutFuncs, StringInfo};
 use serde::{Deserialize, Serialize};
 
 fn compute_digit(mut cpf: i64) -> i64 {
@@ -65,18 +65,18 @@ impl InOutFuncs for Cpf {
         let n = s.parse::<i64>().unwrap();
 
         if n < 100 || n > 99999999999 {
-            pgx::error!("CPF must be between 100 and 99999999999.");
+            pgrx::error!("CPF must be between 100 and 99999999999.");
         }
 
         let dv = n % 100;
         let digit = compute_digit(n / 100);
 
         if dv != digit {
-            pgx::error!("invalid check digit for CPF.");
+            pgrx::error!("invalid check digit for CPF.");
         }
         for i in 1..10 {
             if n == i * 11111111111 {
-                pgx::error!("All CPF digits should not be equal.");
+                pgrx::error!("All CPF digits should not be equal.");
             }
         }
 

@@ -1,6 +1,6 @@
 # pgbrtypes
 
-An experiment to create postgres extensions using Rust [`pgx`](https://github.com/tcdi/pgx) infrastructure.
+An experiment to create postgres extensions using Rust [`pgrx`](https://github.com/tcdi/pgrx) infrastructure.
 
 Also, it's another project to explore brazilian document numbers (CNPJ, CPF, PIS, RG) by creating strong types to each one. The postgres type system will grant:
 
@@ -11,7 +11,7 @@ Also, it's another project to explore brazilian document numbers (CNPJ, CPF, PIS
 ## Installation
 
 ```bash
-cargo pgx package # pg_config must be on PATH
+cargo pgrx package # pg_config must be on PATH
 
 psql
 CREATE EXTENSION pgbrtypes;
