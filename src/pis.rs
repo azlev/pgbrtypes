@@ -1,6 +1,6 @@
 use core::ffi::CStr;
-use pgx::prelude::*;
-use pgx::{InOutFuncs, StringInfo};
+use pgrx::prelude::*;
+use pgrx::{InOutFuncs, StringInfo};
 use serde::{Deserialize, Serialize};
 
 fn compute_digit(mut pis: i64) -> i64 {
@@ -52,14 +52,14 @@ impl InOutFuncs for Pis {
         let n = s.parse::<i64>().unwrap();
 
         if n < 10 || n > 99999999999 {
-            pgx::error!("PIS must be between 10 and 99999999999");
+            pgrx::error!("PIS must be between 10 and 99999999999");
         }
 
         let dv = n % 10;
         let digit = compute_digit(n / 10);
 
         if dv != digit {
-            pgx::error!("invalid check digit for PIS");
+            pgrx::error!("invalid check digit for PIS");
         }
 
         Pis(n)
